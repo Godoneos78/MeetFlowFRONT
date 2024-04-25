@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://meetflowback-production.up.railway.ap', // URL del backend
+  baseURL: 'https://meetflowback-production.up.railway.app', // URL del backend
 });
 
 export default api;
