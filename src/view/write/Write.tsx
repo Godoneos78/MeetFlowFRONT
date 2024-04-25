@@ -21,7 +21,7 @@ const Write: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const navigate = useNavigate()
-  const socket = io('meetflowback-production.up.railway.app/reunion');
+  const socket = io('http://meetflowback-production.up.railway.ap/reunion');
 
   const localData = window.localStorage.getItem('loggedFocusEvent') !== null ? window.localStorage.getItem('loggedFocusEvent') : null;
   const localDataParsed = localData && localData !== 'null' ? JSON.parse(localData) : null;
@@ -37,7 +37,7 @@ const Write: React.FC = () => {
     } else {
       const idUsuario = userData.id;
       console.log(`usuariio : ${userData.nombre}`);
-      axios.get(`meetflowback-production.up.railway.app/reuniones/${idUsuario}/reuniones`)
+      axios.get(`http://meetflowback-production.up.railway.ap/reuniones/${idUsuario}/reuniones`)
         .then(response => {
           console.log(response.data);
           setUsuario(response.data);
