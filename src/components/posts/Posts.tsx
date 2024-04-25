@@ -120,8 +120,8 @@ const Posts: React.FC = () => {
     <div>
       <main>
         <section className="hero">
-          <h1>Reuniones virtuales fáciles y efectivas</h1>
-          <p>Conéctate con colegas y amigos en cualquier lugar y en cualquier momento.</p>
+          <h1>Reuniones en línea simplificada y eficiente.</h1>
+          <p>Establece conexión con compañeros y amigos desde cualquier lugar, en cualquier momento.</p>
           <button onClick={openModal}>Iniciar una reunión</button>
           <div>
             <input

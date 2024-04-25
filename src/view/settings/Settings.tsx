@@ -13,7 +13,7 @@ export default function Settings() {
           <label>Foto de Perfil</label>
           <div className="settingsPP">
             <img
-              src="https://images.pexels.com/photos/6685428/pexels-photo-6685428.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.azcentral.com%2Fstory%2Fnoticias%2F2019%2F02%2F25%2Fgran-canyon-atractivo-turistas%2F2981750002%2F&psig=AOvVaw1xHE8aX07CMhgB0XjAdyD-&ust=1714099143427000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCMiD3Yar3IUDFQAAAAAdAAAAABA2"
               alt=""
             />
             <label htmlFor="fileInput">
