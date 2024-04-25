@@ -405,6 +405,19 @@ const Reunion: React.FC = () => {
       console.error("No se seleccionó ningún archivo.");
     }
   };
+      function addConditionalNode() {
+        var diagram = diagramRef.current.getDiagram();
+        diagram.startTransaction("add Conditional");
+        var nodeData = {
+          category: "Conditional",
+          key: "Cond",
+          loc: "0 0"  // Ubicación predeterminada, puede cambiar según las necesidades
+        };
+        diagram.model.addNodeData(nodeData);
+        diagram.commitTransaction("add Conditional");
+        }
+
+        
 
 
   
@@ -426,6 +439,9 @@ const Reunion: React.FC = () => {
       </div>
       <div>
         <button onClick={downloadSvg}>Descargar Imagen SVG</button>
+      </div>
+      <div>
+      <button onClick={addConditionalNode}>Agregar Condicional</button>
       </div>
       <div>
         <button onClick={handleConvertJavaButtonClick}>Convertir a Java</button>

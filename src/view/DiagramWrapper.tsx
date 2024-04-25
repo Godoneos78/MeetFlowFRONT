@@ -13,6 +13,8 @@ interface DiagramWrapperProps {
   // onNodeDoubleClicked: (e: go.IncrementalData) => void;
 }
 
+
+
 const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
   diagramRef,
   nodeDataArray,
@@ -457,6 +459,74 @@ const DiagramWrapper: React.FC<DiagramWrapperProps> = ({
         diagram.commitTransaction("CambiarNombreNodo");
       }
     });
+
+      
+diagram.addDiagramListener("ObjectDoubleClicked", function (event) {
+  var diagramEvent = event.diagram.selection.first();
+
+  // Verificar si el objeto seleccionado es un nodo
+  var selectedObject = diagramEvent;
+  console.log(selectedObject);
+  // Obtener el nuevo nombre del usuario (podrías mostrar un cuadro de diálogo para que el usuario ingrese un nuevo nombre)
+  // console.log(diagramEvent.fc)
+  var nuevoNombre = prompt("Ingrese el nuevo nombre del nodo:", selectedObject.data.text);
+  if (nuevoNombre !== null) {
+    // Actualizar el nombre del nodo en el modelo de datos
+    diagram.startTransaction("CambiarNombreNodo");
+    console.log("electedObject.data : ", selectedObject.data)
+    diagram.model.setDataProperty(selectedObject.data, "text", nuevoNombre);
+    diagram.commitTransaction("CambiarNombreNodo");
+  }
+});
+
+diagram.nodeTemplateMap.add("Conditional",
+  $(go.Node, "Auto",
+    {
+      resizable: true,
+      resizeObjectName: "PANEL",
+      deletable: true,
+      locationSpot: go.Spot.Center,
+
+    },
+    new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
+    go.GraphObject.make(go.Panel, "Auto",
+      { name: "PANEL" },
+      go.GraphObject.make(go.Shape, "Rectangle",
+        { fill: "rgba(0, 0, 0, 0.1)", stroke: "black", strokeWidth: 2 }),
+      go.GraphObject.make(go.Panel, "Position",
+        { width: 100, height: 100 }),
+      go.GraphObject.make(go.TextBlock,
+        {
+          name: "TEXTBLOCK",
+          margin: 2,
+          editable: true,
+          alignment: go.Spot.TopLeft,
+          position: new go.Point(0, 0),  // Posición inicial del TextBlock
+          stroke: "black",  // Color del borde
+          font: "bold 16px sans-serif",  // Fuente en negrita
+        },
+        new go.Binding("text").makeTwoWay(),
+
+      ),
+
+
+    ),
+    new go.Binding("desiredSize", "size", go.Size.parse).makeTwoWay(go.Size.stringify)
+  )
+);
+
+
+// Añadir el listener para manejar el cambio de tamaño
+diagram.addDiagramListener("PartResized", function (e) {
+  var part = e.subject.part;
+  if (part instanceof go.Node && part.category === "Conditional") {
+    var textBlock = part.findObject("TEXTBLOCK");
+    if (textBlock) {
+      textBlock.alignment = new go.Spot(0, 0, 2, 2);
+    }
+  }
+});
+
 
     return diagram;
   };
